@@ -1,3 +1,44 @@
+from disquera.models import Disquera
+from artista.models import Artista
 from django.db import models
 
-# Create your models here.
+
+class Autor(models.Model):
+    nombre = models.CharField(max_length=200)
+    nacionalidad = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.nombre
+
+    class Meta:
+        ordering = ['nombre']
+
+
+class Album(models.Model):
+    nombre = models.CharField(max_length=100)
+    anio_lanzamiento = models.DateField()
+
+    def __str__(self):
+        return self.nombre
+
+    class Meta:
+        ordering = ['nombre']
+
+
+class Cancion(models.Model):
+    nombre = models.CharField(max_length=20)
+    anio_lanzamiento = models.DateField()
+    precio = models.DecimalField(max_digits=5, decimal_places=2)
+    creado = models.DateTimeField(auto_now_add=True)
+    editado = models.DateTimeField(auto_now=True)
+
+    autor = models.ForeignKey(Autor, on_delete=models.SET_NULL, null=True)
+    album = models.ManyToManyField(Album)
+    artista = models.ManyToManyField(Artista)
+    disquera = models.ManyToManyField(Disquera)
+
+    def __str__(self):
+        return self.nombre
+
+    class Meta:
+        ordering = ['nombre']
