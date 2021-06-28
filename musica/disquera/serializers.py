@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Disquera
+from disquera.models import Disquera
 
 
 class DisqueraSerializer(serializers.ModelSerializer):

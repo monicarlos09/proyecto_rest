@@ -1,6 +1,6 @@
-from django.shortcuts import render
 from rest_framework import serializers, viewsets
-from .models import Artista
+
+from artista.models import Artista
 from .serializers import ArtistaSerializer
 
 
