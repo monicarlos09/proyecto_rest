@@ -3,8 +3,12 @@ from rest_framework import viewsets
 from .models import Cancion, Autor, Album
 from .serializers import CancionSerializer, AutorSerializer, AlbumSerializer
 
+from rest_framework.permissions import IsAuthenticated
+
 
 class CancionViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
+
     serializer_class = CancionSerializer
     queryset = Cancion.objects.all()
 

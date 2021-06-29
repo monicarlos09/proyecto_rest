@@ -3,7 +3,11 @@ from rest_framework import serializers, viewsets
 from artista.models import Artista
 from .serializers import ArtistaSerializer
 
+from rest_framework.permissions import IsAuthenticated
+
 
 class ArtistaViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
+
     serializer_class = ArtistaSerializer
     queryset = Artista.objects.all()
