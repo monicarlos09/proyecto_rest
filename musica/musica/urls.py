@@ -6,4 +6,5 @@ urlpatterns = [
     path('artista/', include('artista.urls')),
     path('disquera/', include('disquera.urls')),
     path('admin/', admin.site.urls),
+    path('api-auth/', include('rest_framework.urls')),
 ]
