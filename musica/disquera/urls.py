@@ -17,6 +17,6 @@ disquera_detail = DisqueraViewSet.as_view({
 
 
 urlpatterns = [
-    path('', disquera_list),
-    path('<int:pk>', disquera_detail),
+    path('', disquera_list, name="lista"),
+    path('<int:pk>', disquera_detail, name="detalle"),
 ]
