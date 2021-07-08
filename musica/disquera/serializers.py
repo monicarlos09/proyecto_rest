@@ -1,11 +1,10 @@
-from rest_framework import serializers
 from disquera.models import Disquera
+from rest_framework import serializers
 
 
 class DisqueraSerializer(serializers.ModelSerializer):
-    usuario = serializers.CharField(
-        source='usuario.username')
+    usuario = serializers.CharField(source="usuario.username")
 
     class Meta:
         model = Disquera
-        fields = '__all__'
+        fields = "__all__"

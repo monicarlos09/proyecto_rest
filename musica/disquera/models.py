@@ -1,5 +1,5 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 
 
 class Disquera(models.Model):
@@ -11,9 +11,9 @@ class Disquera(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        #cadena = self.nombre+","+self.direccion+","+self.telefono
+        # cadena = self.nombre+","+self.direccion+","+self.telefono
         # return cadena
         return self.nombre
 
     class Meta:
-        ordering = ['nombre']
+        ordering = ["nombre"]
