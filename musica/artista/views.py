@@ -1,9 +1,8 @@
-from rest_framework import serializers, viewsets
-
 from artista.models import Artista
-from .serializers import ArtistaSerializer
-
+from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+
+from .serializers import ArtistaSerializer
 
 
 class ArtistaViewSet(viewsets.ModelViewSet):

@@ -1,23 +1,23 @@
-from disquera.models import Disquera
 from artista.models import Artista
-from rest_framework import serializers
-
-from canciones.models import Cancion, Autor, Album
-
 from artista.serializers import ArtistaSerializer
+from canciones.models import Album
+from canciones.models import Autor
+from canciones.models import Cancion
+from disquera.models import Disquera
 from disquera.serializers import DisqueraSerializer
+from rest_framework import serializers
 
 
 class AlbumSerializer(serializers.ModelSerializer):
     class Meta:
         model = Album
-        fields = '__all__'
+        fields = "__all__"
 
 
 class AutorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Autor
-        fields = '__all__'
+        fields = "__all__"
 
 
 class CancionSerializer(serializers.ModelSerializer):
@@ -26,25 +26,28 @@ class CancionSerializer(serializers.ModelSerializer):
     disquera = DisqueraSerializer(many=True, read_only=True)
 
     album_entrada = serializers.PrimaryKeyRelatedField(
-        queryset=Album.objects.all(), many=True, write_only=True)
+        queryset=Album.objects.all(), many=True, write_only=True
+    )
 
     artista_entrada = serializers.PrimaryKeyRelatedField(
-        queryset=Artista.objects.all(), many=True, write_only=True)
+        queryset=Artista.objects.all(), many=True, write_only=True
+    )
 
     disquera_entrada = serializers.PrimaryKeyRelatedField(
-        queryset=Disquera.objects.all(), many=True, write_only=True)
+        queryset=Disquera.objects.all(), many=True, write_only=True
+    )
 
-    nombre_autor = serializers.CharField(source='autor.nombre', read_only=True)
+    nombre_autor = serializers.CharField(source="autor.nombre", read_only=True)
 
     class Meta:
         model = Cancion
-        fields = '__all__'
-        extra_kwargs = {'autor': {'write_only': True}}
+        fields = "__all__"
+        extra_kwargs = {"autor": {"write_only": True}}
 
     def create(self, validated_data):
-        album_data = validated_data.pop('album_entrada')
-        artista_entrada = validated_data.pop('artista_entrada')
-        disquera_entrada = validated_data.pop('disquera_entrada')
+        album_data = validated_data.pop("album_entrada")
+        artista_entrada = validated_data.pop("artista_entrada")
+        disquera_entrada = validated_data.pop("disquera_entrada")
 
         cancion = Cancion.objects.create(**validated_data)
 
@@ -60,18 +63,20 @@ class CancionSerializer(serializers.ModelSerializer):
         return cancion
 
     def update(self, instance, validated_data):
-        instance.nombre = validated_data.get('nombre', instance.nombre)
+        instance.nombre = validated_data.get("nombre", instance.nombre)
         instance.anio_lanzamiento = validated_data.get(
-            'anio_lanzamiento', instance.anio_lanzamiento)
-        instance.precio = validated_data.get('precio', instance.precio)
-        instance.autor = validated_data.get('autor', instance.autor)
+            "anio_lanzamiento", instance.anio_lanzamiento
+        )
+        instance.precio = validated_data.get("precio", instance.precio)
+        instance.autor = validated_data.get("autor", instance.autor)
 
-        instance.album.set(validated_data.get(
-            'album_entrada', instance.album.all()))
-        instance.artista.set(validated_data.get(
-            'artista_entrada', instance.artista.all()))
-        instance.disquera.set(validated_data.get(
-            'disquera_entrada', instance.disquera.all()))
+        instance.album.set(validated_data.get("album_entrada", instance.album.all()))
+        instance.artista.set(
+            validated_data.get("artista_entrada", instance.artista.all())
+        )
+        instance.disquera.set(
+            validated_data.get("disquera_entrada", instance.disquera.all())
+        )
 
         instance.save()
         return instance

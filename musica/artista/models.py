@@ -11,9 +11,9 @@ class Artista(models.Model):
     editado = models.DateTimeField(auto_now=True)
 
     lista_genero = (
-        ('POP', 'POP'),
-        ('ROCK', 'ROCK'),
-        ('RANCHERO', 'RANCHERO'),
+        ("POP", "POP"),
+        ("ROCK", "ROCK"),
+        ("RANCHERO", "RANCHERO"),
     )
 
     genero = models.CharField(
@@ -21,12 +21,12 @@ class Artista(models.Model):
         choices=lista_genero,
         blank=True,
         null=True,
-        default='POP',
-        help_text='Genero del artisita',
+        default="POP",
+        help_text="Genero del artisita",
     )
 
     def __str__(self):
         return self.nombre
 
     class Meta:
-        ordering = ['nombre']
+        ordering = ["nombre"]

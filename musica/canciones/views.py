@@ -1,9 +1,12 @@
 from rest_framework import viewsets
-
-from .models import Cancion, Autor, Album
-from .serializers import CancionSerializer, AutorSerializer, AlbumSerializer
-
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+
+from .models import Album
+from .models import Autor
+from .models import Cancion
+from .serializers import AlbumSerializer
+from .serializers import AutorSerializer
+from .serializers import CancionSerializer
 
 
 class CancionViewSet(viewsets.ModelViewSet):

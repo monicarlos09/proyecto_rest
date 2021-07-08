@@ -1,5 +1,5 @@
-from disquera.models import Disquera
 from artista.models import Artista
+from disquera.models import Disquera
 from django.db import models
 
 
@@ -11,7 +11,7 @@ class Autor(models.Model):
         return self.nombre
 
     class Meta:
-        ordering = ['nombre']
+        ordering = ["nombre"]
 
 
 class Album(models.Model):
@@ -22,7 +22,7 @@ class Album(models.Model):
         return self.nombre
 
     class Meta:
-        ordering = ['nombre']
+        ordering = ["nombre"]
 
 
 class Cancion(models.Model):
@@ -41,4 +41,4 @@ class Cancion(models.Model):
         return self.nombre
 
     class Meta:
-        ordering = ['nombre']
+        ordering = ["nombre"]
