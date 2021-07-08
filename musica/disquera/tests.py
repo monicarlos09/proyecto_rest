@@ -1,13 +1,8 @@
-from django.core.validators import ip_address_validator_map
-from django.http import response
-from rest_framework import status
 from rest_framework.test import APIClient
 from rest_framework.test import APITestCase
 from .models import Disquera
 from django.urls import reverse
 from django.contrib.auth.models import User
-import json
-from django.utils import timezone
 
 
 class TestDisqueraView(APITestCase):
