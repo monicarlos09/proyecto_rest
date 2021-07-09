@@ -16,6 +16,6 @@ artista_detail = ArtistaViewSet.as_view(
 
 
 urlpatterns = [
-    path("", artista_list),
-    path("<int:pk>", artista_detail),
+    path("", artista_list, name="lista"),
+    path("<int:pk>", artista_detail, name="detalle"),
 ]
