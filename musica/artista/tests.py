@@ -1,10 +1,12 @@
 import datetime
+
 from django.contrib.auth.models import User
 from django.urls import reverse
 from rest_framework.test import APIClient
 from rest_framework.test import APITestCase
 
-from .models import Artista, Disquera
+from .models import Artista
+from .models import Disquera
 
 
 class TestArtistaView(APITestCase):
@@ -37,7 +39,7 @@ class TestArtistaView(APITestCase):
             nacionalidad="Mexicano",
             fecha_nacimiento="1990-12-27",
             genero="POP",
-            usuario=cls.test_user2
+            usuario=cls.test_user2,
         )
         cls.artista.disquera.set([cls.disquera, cls.disquera_2])
 
@@ -46,7 +48,7 @@ class TestArtistaView(APITestCase):
 
     def test_lista_artistas(self):
         """
-        Comprobar que el despliegue correctamente el listado de todos los artistas
+        Comprobar el despliegue correcto del listado de todos los artistas
         """
         respuesta = self.client.get(self.url_respuesta)
         self.assertEqual(200, respuesta.status_code)
@@ -118,8 +120,9 @@ class TestArtistaView(APITestCase):
         respuesta_consulta = Artista.objects.get(id=respuesta_post.data["id"])
         self.assertEqual(data_info["nombre"], respuesta_consulta.nombre)
         self.assertEqual(data_info["nacionalidad"], respuesta_consulta.nacionalidad)
-        self.assertEqual(data_info["fecha_nacimiento"],
-                         respuesta_consulta.fecha_nacimiento)
+        self.assertEqual(
+            data_info["fecha_nacimiento"], respuesta_consulta.fecha_nacimiento
+        )
         self.assertEqual(data_info["genero"], respuesta_consulta.genero)
 
         for i in respuesta_post.data["disquera"]:
@@ -164,8 +167,7 @@ class TestArtistaView(APITestCase):
         self.assertEqual(200, respuesta_put.status_code)
         resultado = Artista.objects.get(id=respuesta_put.data["id"])
         self.assertEqual(respuesta_put.data["nombre"], resultado.nombre)
-        self.assertEqual(
-            respuesta_put.data["nacionalidad"], resultado.nacionalidad)
+        self.assertEqual(respuesta_put.data["nacionalidad"], resultado.nacionalidad)
         self.assertEqual(respuesta_put.data["genero"], resultado.genero)
 
         for i in respuesta_put.data["disquera"]:
@@ -201,7 +203,7 @@ class TestArtistaView(APITestCase):
 
     def test_no_listar_info_con_usuario_no_logueado(self):
         """
-        Comprobar que información no se despliega si el usuario no esta logueado
+        Comprobar que la información no se despliega si el usuario no esta logueado
         """
         respuesta = self.client.post(self.url_respuesta)
         self.assertEqual(401, respuesta.status_code)

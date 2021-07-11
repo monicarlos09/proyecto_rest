@@ -1,5 +1,5 @@
+coverage
 Django
 djangorestframework
 markdown
 psycopg2
-coverage

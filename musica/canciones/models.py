@@ -1,6 +1,6 @@
-from django.contrib.auth.models import User
 from artista.models import Artista
 from disquera.models import Disquera
+from django.contrib.auth.models import User
 from django.db import models
 
 
