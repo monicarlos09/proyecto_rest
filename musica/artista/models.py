@@ -1,4 +1,5 @@
 from disquera.models import Disquera
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -19,11 +20,11 @@ class Artista(models.Model):
     genero = models.CharField(
         max_length=8,
         choices=lista_genero,
-        blank=True,
-        null=True,
         default="POP",
         help_text="Genero del artisita",
     )
+
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nombre

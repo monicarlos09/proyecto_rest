@@ -1,5 +1,6 @@
 from artista.models import Artista
 from disquera.models import Disquera
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -36,6 +37,7 @@ class Cancion(models.Model):
     album = models.ManyToManyField(Album)
     artista = models.ManyToManyField(Artista)
     disquera = models.ManyToManyField(Disquera)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nombre

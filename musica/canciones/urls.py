@@ -16,6 +16,6 @@ canciones_detail = CancionViewSet.as_view(
 
 
 urlpatterns = [
-    path("", canciones_list),
-    path("<int:pk>", canciones_detail),
+    path("", canciones_list, name="lista"),
+    path("<int:pk>", canciones_detail, name="detalle"),
 ]
